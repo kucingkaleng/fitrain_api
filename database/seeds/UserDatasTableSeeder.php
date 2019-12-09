@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategoriesTableSeeder extends Seeder
+class UserDatasTableSeeder extends Seeder
 {
 
     /**
@@ -14,23 +14,20 @@ class CategoriesTableSeeder extends Seeder
     {
         
 
-        \DB::table('categories')->delete();
+        \DB::table('user_datas')->delete();
         
-        \DB::table('categories')->insert(array (
+        \DB::table('user_datas')->insert(array (
             0 => 
             array (
                 'id' => '1',
-                'name' => 'Web Programming',
+                'user_id' => '1',
+                'name' => 'General User',
             ),
             1 => 
             array (
                 'id' => '2',
-                'name' => 'Mobile Programming',
-            ),
-            2 => 
-            array (
-                'id' => '3',
-                'name' => 'Aplikasi Perkantoran',
+                'user_id' => '3',
+                'name' => 'admin',
             ),
         ));
         

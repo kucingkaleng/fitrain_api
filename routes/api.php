@@ -16,6 +16,8 @@ Route::group([
 
   Route::get('categories', 'CategoryController@allCategory');
   Route::get('sub-categories', 'CategoryController@allSubCategory');
+
   Route::post('training', 'TrainingController@store');
+  Route::get('training', 'TrainingController@index');
 
 });

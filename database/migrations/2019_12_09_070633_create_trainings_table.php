@@ -19,7 +19,7 @@ class CreateTrainingsTable extends Migration {
 			$table->integer('sub_category_id')->nullable();
 			$table->string('name');
 			$table->string('description');
-			$table->string('duration');
+			$table->string('duration')->nullable();
 			$table->string('code');
 			$table->string('status');
 			$table->timestamps();

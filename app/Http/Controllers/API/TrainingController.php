@@ -16,34 +16,40 @@ class TrainingController extends Controller
 
   public function index()
   {
-    //
+    $trainings = Training::all();
+    $trainings->load('category');
+    $trainings->load('sub_category');
+
+    return response()->json($trainings);
   }
 
   public function store(Request $req)
   {
     // Validations
-    $validation = Validator::make($req->all(), [
-      'category' => 'required'
-    ]);
-
+    $validation = $this->validation($req->all());
     if ($validation->fails()) {
       return response()->json(['errors' => $validation->errors()]);
-    };
+    }
 
     // Cek sub kategori apakah satu rumpun dengan parent kategori
-    $sub_category = SubCategory::find($req->sub_category);
+    $sub_category = SubCategory::find($req->sub_category_id);
 
-    if ($sub_category->category_id != $req->category) {
+    if ($sub_category->category_id != $req->category_id) {
       $res = [
-        'errors' => [
-          'general' => 'sub category invalid'
-        ]
+        'error' => 'sub category invalid'
       ];
-      return response()->json($res);
+      return response()->json($res, 400);
     }
 
     $training = Training::create($req->all());
-    return response()->json($res);
+    return response()->json('ok');
+  }
+
+  public function validation ($req) {
+    return $validation = Validator::make($req, [
+      'category_id' => 'required|integer',
+      'sub_category_id' => 'integer',
+    ]);
   }
 
   public function show($id)
